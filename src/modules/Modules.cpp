@@ -107,6 +107,10 @@
 #include "modules/DropzoneModule.h"
 #endif
 
+#if !MESHTASTIC_EXCLUDE_BOT
+#include "modules/BotModule.h"
+#endif
+
 /**
  * Create module instances here.  If you are adding a new module, you must 'new' it here (or somewhere else)
  */
@@ -158,6 +162,11 @@ void setupModules()
 #endif
 #if !MESHTASTIC_EXCLUDE_DROPZONE
     dropzoneModule = new DropzoneModule();
+#endif
+#if !MESHTASTIC_EXCLUDE_BOT
+    // Bot module is always instantiated so it can be configured via admin
+    // It will only respond if enabled in config
+    botModule = new BotModule();
 #endif
 #if !MESHTASTIC_EXCLUDE_GENERIC_THREAD_MODULE
     new GenericThreadModule();
